@@ -27,11 +27,11 @@ class ProductoController extends Controller
         //return view('usuarios', compact('usuarios'));
 
 
-        $productos = Producto::all()
-            ->where('precio', '>=', 1000)
-            ->pluck('nombre')
-            ->sortDesc()
-            ->values();
-        return $productos;
+        // $productos = Producto::all()
+        //     ->where('precio', '>=', 1000)
+        //     ->pluck('nombre')
+        //     ->sortDesc()
+        //     ->values();
+        // return $productos;
     }
 }
