@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiExampleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -47,3 +48,19 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
+/*
+|--------------------------------------------------------------------------
+| API Examples Routes
+|--------------------------------------------------------------------------
+|
+| Rutas para demostrar el consumo de APIs externas con Laravel HTTP Client
+|
+*/
+
+Route::prefix('api-examples')->middleware(['auth'])->group(function () {
+    // Menú principal de ejemplos
+    Route::get('/', [ApiExampleController::class, 'index'])->name('api-examples.index');
+    
+    // Ejemplo 1: GET Request Simple
+    Route::get('/get-users', [ApiExampleController::class, 'getUsers'])->name('api-examples.get-users');
+});

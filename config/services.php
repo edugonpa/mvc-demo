@@ -35,4 +35,28 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | External APIs Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Configuración para APIs externas utilizadas en los ejemplos
+    |
+    */
+
+    'jsonplaceholder' => [
+        'url' => env('JSONPLACEHOLDER_API_URL', 'https://jsonplaceholder.typicode.com'),
+    ],
+
+    'external_api' => [
+        'url' => env('EXTERNAL_API_URL', 'https://api.example.com'),
+        'token' => env('EXTERNAL_API_TOKEN', ''),
+    ],
+
+    'api' => [
+        'timeout' => env('API_TIMEOUT', 30),
+        'retry_times' => env('API_RETRY_TIMES', 3),
+        'retry_sleep' => env('API_RETRY_SLEEP', 100),
+    ],
+
 ];
