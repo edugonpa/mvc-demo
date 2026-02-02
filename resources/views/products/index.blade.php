@@ -2,6 +2,20 @@
 
 @section('content')
 
+    {{-- Mensajes flash de éxito --}}
+    @if(session('success'))
+        <div style="padding: 10px; margin-bottom: 15px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 4px;">
+            ✅ {{ session('success') }}
+        </div>
+    @endif
+
+    {{-- Mensajes flash de error --}}
+    @if(session('error'))
+        <div style="padding: 10px; margin-bottom: 15px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 4px;">
+            ❌ {{ session('error') }}
+        </div>
+    @endif
+
     <a href="{{ route('products.create') }}">➕ Crear producto</a>
 
     <br><br>
@@ -24,13 +38,17 @@
                     <td>
                         <a href="{{ route('products.edit', $product) }}">✏️ Editar</a>
 
-                        <form action="{{ route('products.destroy', $product) }}"
-                              method="POST"
-                              style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">🗑 Eliminar</button>
-                        </form>
+                        {{-- Solo mostrar botón de eliminar si el usuario es admin --}}
+                        @if(auth()->user()->isAdmin())
+                            <form action="{{ route('products.destroy', $product) }}"
+                                  method="POST"
+                                  style="display:inline;"
+                                  onsubmit="return confirm('¿Estás seguro de eliminar este producto?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">🗑 Eliminar</button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @empty
